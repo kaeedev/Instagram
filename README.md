@@ -1,6 +1,6 @@
 ## ESP:
 
-# Clon de Instagram 📚
+# Clon de Instagram 📷📸
 
 Clon de instagram utilizando django y un poco de bootstrap, aunque apenas tiene estilos
 
