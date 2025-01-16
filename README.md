@@ -42,7 +42,7 @@ El proyecto se divide en varias apps, como posts que recoge todas las funcionali
 - **Registro**: La página cuenta con un formulario para registrar usuarios que quedarán guardados en la base de datos. Es muy importante registrarse para
   poder utilizar todas las funcionalidades del proyecto, ya que el proyecto tiene vistas protegidas y funciones protegidas.
   
-- **Iniciar sesión**: Podrás logearte con tu usuario
+- **Iniciar sesión**: Podrás logearte con tu usuario. Cuando inicias sesion, solo ves las publicaciones de los perfiles que sigues
   
 - **Agregar publicaciones**: Puedes subir las fotos que desees con una descripción
 
