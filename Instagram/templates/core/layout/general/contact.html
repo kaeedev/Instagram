@@ -1,0 +1,13 @@
+{% extends 'core/layout/general/layout.html' %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Bienvenido a nuestro Instagram" %}{% endblock %}
+
+{% block page_content %}
+<div class= "container"> 
+    {% include '_includes/_messages.html' %}   
+    <h1>Contacto</h1>       
+    <p> {% trans "Este es el contenido de contacto" %} </p> 
+</div>
+
+{% endblock %}

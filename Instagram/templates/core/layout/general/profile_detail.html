@@ -1,0 +1,62 @@
+{% extends "core/layout/general/layout.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}Bienvenido a nuestro InstaConquer{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  {% include '_includes/_messages.html' %}
+
+  <h1>Perfil</h1>
+  <p>Biografía: {{ profile.bio|default_if_none:"Sin rellenar" }}</p>
+  <p>Fecha de nacimiento: {{ profile.birth_date|default_if_none:"Sin rellenar" }}</p>
+  <p>
+    {% if profile.profile_picture %}
+      <img width="100" src="{{ profile.profile_picture.url }}" alt="">
+    {% else %}
+      No dispone de foto de perfil
+    {% endif %}
+  </p>
+  <p>Publicaciones: {{ profile.user.posts.count }}</p>
+  <p>Seguidores: {{ profile.following.count }}</p>
+  <p>Seguidos: {{ profile.followers.count }}</p>
+  {% if profile not in request.user.profile.follower_set.all %}
+  {% if following %}
+    <p>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.profile_pk|as_crispy_field }}
+        <input type="hidden" name="action" value="unfollow"
+        <input type="hidden" name="profile_pk" value="{{ profile.pk }}">
+        <button>Dejar de seguir</button>
+      </form>
+    </p>
+  {% else %}
+    <p>
+      {% if profile.user != request.user %}
+        <form method="post">
+          {% csrf_token %}
+          {{ form.profile_pk|as_crispy_field }}
+          <input type="hidden" name="action" value="follow"
+          <input type="hidden" name="profile_pk" value="{{ profile.pk }}">
+          <button>Seguir</button>
+        </form>
+        {% endif %}
+    </p>
+    {% endif %}
+  {% endif %}
+
+  {% if profile.user == request.user %} {# Para que aparezca solo el boton de editar si el perfil es nuestro#}
+  <p><a href="{% url 'profile_update' profile.pk %}">Editar</a></p>
+  {% endif %}
+  <section>
+    <h2>Publicaciones</h2>
+    <div class="row">
+      {% for post in profile.user.posts.all %}
+        <div class="col-12 col-sm-6 col-md-4">
+          {% include '_includes/posts/_post.html' %} {#Incluimos el post.html con la logica de todas las publicaciones para no repetirlo#}
+        </div>
+      {% endfor %}
+      </div>
+  </section>
+</div>
+{% endblock %}
